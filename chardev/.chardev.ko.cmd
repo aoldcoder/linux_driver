@@ -1,0 +1,1 @@
+cmd_/home/andy/Documents/codes/chardev/chardev.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000  --build-id  -T ./scripts/module-common.lds -o /home/andy/Documents/codes/chardev/chardev.ko /home/andy/Documents/codes/chardev/chardev.o /home/andy/Documents/codes/chardev/chardev.mod.o;  true
