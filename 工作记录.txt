@@ -1,0 +1,95 @@
+http://192.168.12.238/admin/users/cxq
+12345678
+克隆代码
+git@192.168.12.238:chenqing/t972.git
+
+ssh:chenxq@192.168.12.18
+chenxq
+cxq123456
+
+MT8163_O1_MP5_V1
+lunch 44
+
+
+
+************************************************************************************************************************************************************************
+kernel-4.9 is not clean, please run ‘make mrproper 报错的解决方法
+总结一下：
+
+遇上这种错误的解决方法：
+
+1、运行make mrproper删除kernel目录下的.config
+
+2、删除kernel顶级目录下include目录下的config这个目录，便能解决问题。
+
+
+开发服务器上文件复制到公共服务器上
+scp -r chenxq@192.168.12.18:/home/chenxq/mtk/mtk8163_o/MT8163_O1_MP5_V1/out/target/product/a8316/*.img Y:\cxq
+
+scp -r chenxq@192.168.12.18:/home/chenxq/mtk/mtk8163_o/MT8163_O1_MP5_V1/out/target/product/a8316/*.bin Y:\cxq
+
+scp -r chenxq@192.168.12.18:/home/chenxq/mtk/mtk8163_o/MT8163_O1_MP5_V1/out/target/product/a8316/*.txt Y:\cxq
+
+mtk8163_o/MT8163_O1_MP5_V1/kernel-3.18/kernel/reboot.c
+
+A8163 AM400
+光机GPIO定义路径
+mtk8163_o/MT8163_O1_MP5_V1/vendor/mediatek/proprietary/bootable/bootloader/lk/platform/mt8163/dlpc343x.c
+#define GPIO_DLPC_PROJECT_ON           	(GPIO32| 0x80000000)
+
+参考
+mtk8163_o/MT8163_O1_MP5_V1/vendor/mediatek/proprietary/bootable/bootloader/lk/platform/mt8163/dlpc2607.c
+#define GPIO_DLPC_PROJECT_ON          (GPIO30 | 0x80000000)
+
+
+	dlpc_set_gpio_output(GPIO_343x_Galvanometer,0);
+	mdelay(20);
+    mdelay(2000);
+    dlpc_set_gpio_output(GPIO_DLPC_PROJECT_DCDC,0);
+    mdelay(2000);
+	dlpc_set_gpio_output(GPIO_DLPC_PROJECT_ON,0);
+    mdelay(2000);
+    dlpc_set_gpio_output(GPIO_DEPC_PROJECT_POWER_EN,0);
+	LPC_DBG("%s dlpc pjon power off!!!\n",__func__);
+	
+	
+	gpio_proj_on   开关电源
+	
+	
+AM400 
+mtk8163_o/MT8163_O1_MP5_V1/vendor/mediatek/proprietary/bootable/bootloader/lk/dev/lcm/c106_tc358775/c106_tc358775.c
+
+
+pl_power_off();
+
+
+cat /sys/disp/ tmp_auxin_adc
+
+/sys/class/net/eth0/carrier节点由下面这个文件产生
+mtk8163_o/MT8163_O1_MP5_V1/kernel-3.18/net/core/net-sysfs.c
+
+adb 操作GPIO
+1. 设备开机，adb shell进入设备，使用find命令找到mt_gpio节点
+find ./sys -name "mt_gpio"
+
+2. 进入mt_gpio节点路径	
+cd sys/bus/platform/drivers/mediatek-mt6758-pinctrl/10050000.pinctrl/
+
+3. 设置gpio的状态 如下为设置gpio60 的状态信息
+
+echo "mode 60 0" > mt_gpio //set gpio60 mode0
+echo "dir 60 1"> mt_gpio //set gpio60 0:input;1,output
+echo "out 60 1"> mt_gpio //set gpio60 output value: 0,low;1,high
+echo "pullen 60 1" > mt_gpio //set gpio60 1,pull enable;0, pull disable
+echo "pullsel 60 0"> mt_gpio //set gpio60 1,pullup;0,pull down
+————————————————
+3. 设置gpio的状态 如下为设置gpio60 的状态信息
+
+echo "mode 60 0" > mt_gpio //set gpio60 mode0
+echo "dir 60 1"> mt_gpio //set gpio60 0:input;1,output
+echo "out 60 1"> mt_gpio //set gpio60 output value: 0,low;1,high
+echo "pullen 60 1" > mt_gpio //set gpio60 1,pull enable;0, pull disable
+echo "pullsel 60 0"> mt_gpio //set gpio60 1,pullup;0,pull down
+————————————————
+
+	
