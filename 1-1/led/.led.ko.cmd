@@ -1,0 +1,1 @@
+cmd_/home/andy/Documents/code/1-1/led/led.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000  --build-id  -T ./scripts/module-common.lds -o /home/andy/Documents/code/1-1/led/led.ko /home/andy/Documents/code/1-1/led/led.o /home/andy/Documents/code/1-1/led/led.mod.o;  true
